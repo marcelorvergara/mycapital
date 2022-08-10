@@ -1,7 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ICard, searchCardApi } from "../api/client";
 import Card from "../components/Card";
 import Deck from "../components/Deck";
+import Select from "react-select";
+
+const options = [
+  { value: "mago", label: "Mago" },
+  { value: "paladino", label: "Paladino" },
+  { value: "caçador", label: "Caçador" },
+  { value: "druida", label: "Druida" },
+  { value: "qualquer", label: "Qualquer" },
+];
 
 function Manage() {
   // listagem de cards mostrados pela busca
@@ -53,17 +62,17 @@ function Manage() {
           ))}
       </div>
       <div className="flex mt-6">
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center gap-6">
           <div className="mb-3 xl:w-70">
             <label
-              htmlFor="cardSearch"
+              htmlFor="cardSearchId"
               className="form-label inline-block mb-2 text-gray-700">
               Consulta de carta por Id:
             </label>
             <input
-              type="text"
+              type="search"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearch"
+              id="cardSearchId"
               placeholder="Procure por cartas aqui"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 searchCard(e.target.value, "id")
@@ -72,14 +81,14 @@ function Manage() {
           </div>
           <div className="mb-3 xl:w-70">
             <label
-              htmlFor="cardSearch"
+              htmlFor="cardSearchNome"
               className="form-label inline-block mb-2 text-gray-700">
               Consulta de carta por nome:
             </label>
             <input
-              type="text"
+              type="search"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearch"
+              id="cardSearchName"
               placeholder="Procure por cartas aqui"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 searchCard(e.target.value, "nome")
@@ -88,35 +97,70 @@ function Manage() {
           </div>
           <div className="mb-3 xl:w-70">
             <label
-              htmlFor="cardSearch"
+              htmlFor="cardSearchClasse"
               className="form-label inline-block mb-2 text-gray-700">
               Consulta de carta por classe:
             </label>
-            <input
-              type="text"
-              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearch"
-              placeholder="Procure por cartas aqui"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                searchCard(e.target.value, "classe")
-              }
+            <Select
+              placeholder="Selecione a classe"
+              options={options}
+              onChange={(event) => searchCard(event?.value || "", "classe")}
             />
           </div>
-          <div className="mb-3 xl:w-70">
+          <div className="ml-6 mb-3 xl:w-70">
             <label
-              htmlFor="cardSearch"
+              htmlFor="cardSearchTipo"
               className="form-label inline-block mb-2 text-gray-700">
               Consulta de carta por tipo:
             </label>
-            <input
-              type="text"
-              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearch"
-              placeholder="Procure por cartas aqui"
+            <div
+              className="flex gap-2 items-center justify-between"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 searchCard(e.target.value, "tipo")
-              }
-            />
+              }>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="ambos"
+                  value=""
+                />
+                <label
+                  className="form-check-label inline-block text-gray-800"
+                  htmlFor="ambos">
+                  Magia ou Criatura
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="magia"
+                  value="magia"
+                />
+                <label
+                  className="form-check-label inline-block text-gray-800"
+                  htmlFor="magia">
+                  Magia
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="criatura"
+                  value="criatura"
+                />
+                <label
+                  className="form-check-label inline-block text-gray-800"
+                  htmlFor="criatura">
+                  Criatura
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
