@@ -53,7 +53,7 @@ describe("Card test", () => {
   it("renders Card component", () => {
     render(
       <MemoryRouter>
-        <Card card={card} />
+        <Card card={card} addCardToList={() => []} />
       </MemoryRouter>
     );
   });
@@ -69,4 +69,8 @@ describe("Test functions", () => {
     const response = await getCardsApi();
     expect(response).toBeDefined();
   });
+});
+
+describe("Test helpers", () => {
+  it("should test local storage", async () => {});
 });

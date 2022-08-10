@@ -1,10 +1,12 @@
+import React from "react";
 import { ICard } from "../api/client";
 
 interface ICardProps {
   card: ICard;
+  addCardToList: (e: React.MouseEvent, card: ICard) => void;
 }
 
-function Card({ card }: ICardProps) {
+function Card({ card, addCardToList }: ICardProps) {
   return (
     <div className="">
       <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg bg-white max-w-sm h-72">
@@ -21,12 +23,8 @@ function Card({ card }: ICardProps) {
         <div className="flex gap-32 items-center justify-between">
           <button
             type="button"
-            className=" inline-block px-6 py-2.5 bg-red-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-500 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-            Remover
-          </button>
-          <button
-            type="button"
-            className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+            className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            onClick={(e: React.MouseEvent) => addCardToList(e, card)}>
             Adicionar
           </button>
         </div>

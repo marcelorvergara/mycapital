@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ICard, searchCardApi } from "../api/client";
 import Card from "../components/Card";
 import Deck from "../components/Deck";
 
 function Manage() {
+  // function refreshPage() {
+  //   window.location.reload();
+  // }
+  // listagem de cards mostrados pela busca
   const [cards, setCards] = useState<ICard[]>([]);
 
   async function searchCard(e: string) {
@@ -11,10 +15,47 @@ function Manage() {
     setCards(response);
   }
 
+  // administração do deck de cards
+  const [cardsList, setCardsList] = useState<ICard[]>(() => {
+    const cards = localStorage.getItem("cards") as string;
+    if (cards === null || cards === "null") return [];
+    try {
+      return JSON.parse(cards);
+    } catch {}
+
+    return cards;
+  });
+
+  function addCardToList(e: React.MouseEvent, card: ICard) {
+    const cardsListCopy = cardsList.slice();
+    cardsListCopy.push(card);
+    localStorage.setItem("cards", JSON.stringify(cardsListCopy));
+    setCardsList(cardsListCopy);
+    //refreshPage();
+  }
+
+  async function removeCardFromList(e: React.MouseEvent, cardId: string) {
+    const cardsListCopy = cardsList.slice();
+    const newCardsList = cardsListCopy.filter((item) => item.id !== cardId);
+    localStorage.setItem("cards", JSON.stringify(newCardsList));
+    setCardsList(newCardsList);
+    //refreshPage();
+  }
+
   return (
     <div className="mx-24">
-      <div className="mt-12">
-        <Deck />
+      <div className="flex flex-wrap gap-3 flex-row mt-12 bg-slate-400 p-12">
+        {cardsList &&
+          cardsList.map((item: ICard, idx: React.Key | null | undefined) => (
+            <Deck
+              key={idx}
+              card={item}
+              removeCardFromList={(
+                e: React.MouseEvent<Element, MouseEvent>,
+                cardId: string
+              ) => removeCardFromList(e, cardId)}
+            />
+          ))}
       </div>
       <div className="flex mt-6">
         <div className="flex justify-center">
@@ -38,7 +79,16 @@ function Manage() {
       </div>
       <div className="flex flex-row flex-wrap gap-4 mt-6">
         {cards &&
-          cards.map((card: ICard) => <Card key={card.id} card={card} />)}
+          cards.map((card: ICard) => (
+            <Card
+              key={card.id}
+              card={card}
+              addCardToList={(
+                e: React.MouseEvent<Element, MouseEvent>,
+                card: ICard
+              ) => addCardToList(e, card)}
+            />
+          ))}
       </div>
     </div>
   );
