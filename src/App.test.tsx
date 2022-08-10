@@ -34,7 +34,7 @@ describe("Manage test", () => {
 
   it("should test autocomplete", async () => {
     render(<Manage />);
-    const filter = screen.getByLabelText(/Consulta de carta:/i);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "mycapital" } });
 
     expect(screen.queryByText("mycapitalll")).not.toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("Manage test", () => {
 
   it("should test card rendering inside Manage component", () => {
     render(<Manage />);
-    const filter = screen.getByLabelText(/Consulta de carta:/i);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 
     return screen.findAllByRole("button", { name: /adicionar/i });

@@ -13,6 +13,8 @@ const options = [
 ];
 
 function Manage() {
+  const [alert, setAlert] = useState("");
+
   // listagem de cards mostrados pela busca
   const [cards, setCards] = useState<ICard[]>([]);
 
@@ -34,16 +36,32 @@ function Manage() {
 
   function addCardToList(e: React.MouseEvent, card: ICard) {
     const cardsListCopy = cardsList.slice();
-    cardsListCopy.push(card);
-    localStorage.setItem("cards", JSON.stringify(cardsListCopy));
-    setCardsList(cardsListCopy);
+    setAlert("");
+    // testar se há cartas duplicadas
+    const findResult = cardsListCopy.filter((f) => f.id === card.id);
+    // número máximo de cartas = 30
+    if (cardsListCopy.length >= 30) {
+      setAlert("Número máximo de cartas atingido");
+    } else if (findResult.length > 1) {
+      // aqui pelo menos uma carta já está no deck
+      setAlert("Só são permitidas 2 cartas iguais");
+    } else {
+      cardsListCopy.push(card);
+      localStorage.setItem("cards", JSON.stringify(cardsListCopy));
+      setCardsList(cardsListCopy);
+    }
   }
 
   async function removeCardFromList(e: React.MouseEvent, cardId: string) {
+    setAlert("");
     const cardsListCopy = cardsList.slice();
-    const newCardsList = cardsListCopy.filter((item) => item.id !== cardId);
-    localStorage.setItem("cards", JSON.stringify(newCardsList));
-    setCardsList(newCardsList);
+    //const newCardsList = cardsListCopy.filter((item) => item.id !== cardId);
+    cardsListCopy.splice(
+      cardsListCopy.findIndex((i) => i.id === cardId),
+      1
+    );
+    localStorage.setItem("cards", JSON.stringify(cardsListCopy));
+    setCardsList(cardsListCopy);
   }
 
   return (
@@ -61,6 +79,9 @@ function Manage() {
             />
           ))}
       </div>
+      {alert && (
+        <div className="w-full text-white bg-red-500 px-2.5 py-2">{alert}</div>
+      )}
       <div className="flex mt-6">
         <div className="flex justify-center gap-6">
           <div className="mb-3 xl:w-70">
