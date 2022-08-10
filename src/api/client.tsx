@@ -19,8 +19,8 @@ async function getCardsApi() {
   return response.data;
 }
 
-async function searchCardApi(search: string): Promise<ICard[]> {
-  const response = await axios.get(`/allCards?nome_like=${search}`);
+async function searchCardApi(search: string, field: string): Promise<ICard[]> {
+  const response = await axios.get(`/allCards?${field}_like=${search}`);
   return response.data;
 }
 

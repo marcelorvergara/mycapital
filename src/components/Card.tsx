@@ -8,7 +8,7 @@ interface ICardProps {
 
 function Card({ card, addCardToList }: ICardProps) {
   return (
-    <div className="">
+    <div className="w-80">
       <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg bg-white max-w-sm h-72">
         <h5 className="text-gray-50 text-xl leading-tight font-medium mb-2 bg-slate-600 rounded-sm px-2.5 py-2">
           {card.nome}
@@ -20,7 +20,7 @@ function Card({ card, addCardToList }: ICardProps) {
           <div>Tipo: {card.tipo}</div>
           <div>Classe: {card.classe}</div>
         </div>
-        <div className="flex gap-32 items-center justify-between">
+        <div className="flex gap-32 items-center justify-end">
           <button
             type="button"
             className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"

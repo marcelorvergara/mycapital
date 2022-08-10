@@ -61,7 +61,7 @@ describe("Card test", () => {
 
 describe("Test functions", () => {
   it("should test searchCardApi", async () => {
-    const response = await searchCardApi("as");
+    const response = await searchCardApi("as", "nome");
     expect(response).toBeDefined();
   });
 
