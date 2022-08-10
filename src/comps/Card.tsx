@@ -8,7 +8,7 @@ function Card({ card }: ICardProps) {
   console.log(card);
   return (
     <div className="">
-      <div className="flex flex-col justify-between block p-6 rounded-lg shadow-lg bg-white max-w-sm h-56">
+      <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg bg-white max-w-sm h-56">
         <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">
           {card.nome}
         </h5>

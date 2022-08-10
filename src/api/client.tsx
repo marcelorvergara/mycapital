@@ -16,7 +16,7 @@ const axios = axiosModule.create({
 
 async function getCardsApi() {
   const response = await axios.get("/allCards");
-  console.log(response.data);
+  return response.data;
 }
 
 async function searchCardApi(search: string): Promise<ICard[]> {
