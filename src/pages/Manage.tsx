@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ICard, searchCardApi } from "../api/client";
-import Card from "../comps/Card";
-import Deck from "../comps/Deck";
+import Card from "../components/Card";
+import Deck from "../components/Deck";
 
 function Manage() {
   const [cards, setCards] = useState<ICard[]>([]);

@@ -5,7 +5,6 @@ interface ICardProps {
 }
 
 function Card({ card }: ICardProps) {
-  console.log(card);
   return (
     <div className="">
       <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg bg-white max-w-sm h-72">
