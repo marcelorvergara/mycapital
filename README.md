@@ -1,6 +1,6 @@
 # App HearthStone (mycapital)
 
-<img src="https://github.com/marcelorvergara/Fisio-Vue-mycapital/blob/main/misc_files/recording.gif">
+<img src="https://github.com/marcelorvergara/mycapital/blob/main/misc_files/recording.gif">
 
 # Getting Started with Create React App
 
