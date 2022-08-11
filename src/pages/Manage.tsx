@@ -67,7 +67,7 @@ function Manage() {
   return (
     <div className="mx-24">
       <div className="flex flex-wrap gap-3 flex-row mt-12 bg-slate-400 p-12">
-        {cardsList &&
+        {cardsList.length > 0 ? (
           cardsList.map((item: ICard, idx: React.Key | null | undefined) => (
             <Deck
               key={idx}
@@ -77,10 +77,17 @@ function Manage() {
                 cardId: string
               ) => removeCardFromList(e, cardId)}
             />
-          ))}
+          ))
+        ) : (
+          <div className="text-gray-300 text-xl">Nenhuma carta cadastrada</div>
+        )}
       </div>
       {alert && (
-        <div className="w-full text-white bg-red-500 px-2.5 py-2">{alert}</div>
+        <div
+          data-testid="alert"
+          className="w-full text-white bg-red-500 px-2.5 py-2">
+          {alert}
+        </div>
       )}
       <div className="flex mt-6">
         <div className="flex justify-center gap-6">

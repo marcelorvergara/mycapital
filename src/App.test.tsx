@@ -47,6 +47,56 @@ describe("Manage test", () => {
 
     return screen.findAllByRole("button", { name: /adicionar/i });
   });
+
+  it("should test add card", async () => {
+    render(<Manage />);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
+    fireEvent.change(filter, { target: { value: "a" } });
+
+    const btn = await screen.findAllByRole("button", { name: /adicionar/i });
+    fireEvent.click(btn[0]);
+  });
+
+  it("should test remove card", async () => {
+    render(<Manage />);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
+    fireEvent.change(filter, { target: { value: "a" } });
+
+    const btnAdd = await screen.findAllByRole("button", { name: /adicionar/i });
+    fireEvent.click(btnAdd[0]);
+
+    const btnRem = await screen.findAllByRole("button", { name: /remover/i });
+    fireEvent.click(btnRem[0]);
+  });
+
+  it("should test card limit of same card", async () => {
+    render(<Manage />);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
+    fireEvent.change(filter, { target: { value: "a" } });
+
+    const btnAdd = await screen.findAllByRole("button", { name: /adicionar/i });
+    fireEvent.click(btnAdd[0]);
+    fireEvent.click(btnAdd[0]);
+    fireEvent.click(btnAdd[0]);
+    fireEvent.click(btnAdd[0]);
+
+    const alert = await screen.findByTestId("alert");
+    expect(alert).toBeInTheDocument();
+  });
+
+  it("should test card limit of 30", async () => {
+    render(<Manage />);
+    const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
+    fireEvent.change(filter, { target: { value: "a" } });
+
+    const btnAdd = await screen.findAllByRole("button", { name: /adicionar/i });
+    for (let i = 0; i < 31; i++) {
+      fireEvent.click(btnAdd[i]);
+    }
+
+    const alert = await screen.findByTestId("alert");
+    expect(alert).toBeInTheDocument();
+  });
 });
 
 describe("Card test", () => {
