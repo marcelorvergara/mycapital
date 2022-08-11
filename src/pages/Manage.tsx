@@ -4,6 +4,8 @@ import Card from "../components/Card";
 import Deck from "../components/Deck";
 import Select from "react-select";
 import ClipLoader from "react-spinners/ClipLoader";
+import InputSearch from "../components/InputSearch";
+import RadioButton from "../components/RadioButton";
 
 const options = [
   { value: "mago", label: "Mago" },
@@ -70,7 +72,8 @@ function Manage() {
 
   return (
     <div className="mx-24">
-      <div className="flex flex-wrap gap-3 flex-row mt-12 bg-slate-400 p-12">
+      <div className="flex flex-wrap gap-3 flex-row mt-12 bg-slate-400 p-6 rounded-sm">
+        {/* área para apresentação das cartas (deck) */}
         {cardsList.length > 0 ? (
           cardsList.map((item: ICard, idx: React.Key | null | undefined) => (
             <Deck
@@ -86,6 +89,7 @@ function Manage() {
           <div className="text-gray-300 text-xl">Nenhuma carta cadastrada</div>
         )}
       </div>
+      {/* área para apresentar alerta - caso ocorra a necessidade */}
       {alert && (
         <div
           data-testid="alert"
@@ -93,40 +97,11 @@ function Manage() {
           {alert}
         </div>
       )}
+      {/* área para os inputs de pesquisa das cartas */}
       <div className="flex mt-6">
         <div className="flex justify-center gap-6">
-          <div className="mb-3 xl:w-70">
-            <label
-              htmlFor="cardSearchId"
-              className="form-label inline-block mb-2 text-gray-700">
-              Consulta de carta por Id:
-            </label>
-            <input
-              type="search"
-              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearchId"
-              placeholder="Procure por cartas aqui"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                searchCard(e.target.value, "id")
-              }
-            />
-          </div>
-          <div className="mb-3 xl:w-70">
-            <label
-              htmlFor="cardSearchNome"
-              className="form-label inline-block mb-2 text-gray-700">
-              Consulta de carta por nome:
-            </label>
-            <input
-              type="search"
-              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
-              id="cardSearchName"
-              placeholder="Procure por cartas aqui"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                searchCard(e.target.value, "nome")
-              }
-            />
-          </div>
+          <InputSearch field={"id"} searchCard={searchCard} />
+          <InputSearch field={"nome"} searchCard={searchCard} />
           <div className="mb-3 xl:w-70">
             <label
               htmlFor="cardSearchClasse"
@@ -145,57 +120,11 @@ function Manage() {
               className="form-label inline-block mb-2 text-gray-700">
               Consulta de carta por tipo:
             </label>
-            <div
-              className="flex gap-2 items-center justify-between"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                searchCard(e.target.value, "tipo")
-              }>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="ambos"
-                  value=""
-                />
-                <label
-                  className="form-check-label inline-block text-gray-800"
-                  htmlFor="ambos">
-                  Magia ou Criatura
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="magia"
-                  value="magia"
-                />
-                <label
-                  className="form-check-label inline-block text-gray-800"
-                  htmlFor="magia">
-                  Magia
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="criatura"
-                  value="criatura"
-                />
-                <label
-                  className="form-check-label inline-block text-gray-800"
-                  htmlFor="criatura">
-                  Criatura
-                </label>
-              </div>
-            </div>
+            <RadioButton searchCard={searchCard} />
           </div>
         </div>
       </div>
+      {/* área para apresentar os restultados da pesquisa e o spinner (loading) */}
       <div className="flex flex-row flex-wrap gap-4 mt-6">
         {loading ? (
           <div className="flex justify-center m-5 w-full">
