@@ -1,6 +1,6 @@
 # App HearthStone (mycapital)
 
-<img src="https://github.com/marcelorvergara/mycapital/blob/main/misc_files/recording.gif">
+<img src="https://github.com/marcelorvergara/mycapital/blob/main/misc_files/recording.gif" alt="demonstração do uso do aplicativo">
 
 ### O que esse app faz?
 
@@ -20,9 +20,11 @@
 
 ### O que pode melhorar
 
-- A cobertura de testes está um pouco acima de 90%. Relatório disponível em <a href="https://github.com/marcelorvergara/mycapital/blob/main/coverage/lcov-report/index.html" target="_blank">Cobertura dos Testes </a>.
 - O mecanismo de busca não realiza buscas combinadas de forma satisfatória.
 - A responsividade para aparelhos móveis não foi considerada.
+- A cobertura de testes está um pouco acima de 90%.
+
+<img src="https://github.com/marcelorvergara/mycapital/blob/main/misc_files/test_coverage.png" alt="Cobertura dos testes">
 
 ## Setup do projeto
 
