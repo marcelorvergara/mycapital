@@ -4,10 +4,13 @@ import Card from "../components/Card";
 import Deck from "../components/Deck";
 import Select from "react-select";
 import ClipLoader from "react-spinners/ClipLoader";
-import InputSearch from "../components/InputSearch";
 import RadioButton from "../components/RadioButton";
+import InputSearch from "../components/InputSearch";
+import home from "../img/home.png";
+import { Link } from "react-router-dom";
 
 const options = [
+  { value: null, label: "Classe" },
   { value: "mago", label: "Mago" },
   { value: "paladino", label: "Paladino" },
   { value: "caçador", label: "Caçador" },
@@ -18,14 +21,20 @@ const options = [
 function Manage() {
   const [alert, setAlert] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [fieldId, setFieldId] = useState("");
   // listagem de cards mostrados pela busca
   const [cards, setCards] = useState<ICard[]>([]);
 
   async function searchCard(e: string, field: string) {
     setLoading(true);
     const response = await searchCardApi(e, field);
-    setCards(response);
+    if (cards.length > 0 && fieldId !== field) {
+      const ids = new Set(cards.map((d) => d.id));
+      setCards([...new Set([...response.filter((f) => ids.has(f.id))])]);
+    } else {
+      setCards(response);
+    }
+    setFieldId(field);
     setLoading(false);
   }
 
@@ -40,6 +49,7 @@ function Manage() {
     return cards;
   });
 
+  // adição de cards no deck
   function addCardToList(e: React.MouseEvent, card: ICard) {
     const cardsListCopy = cardsList.slice();
     setAlert("");
@@ -58,6 +68,7 @@ function Manage() {
     }
   }
 
+  // remoção de cards do deck
   async function removeCardFromList(e: React.MouseEvent, cardId: string) {
     setAlert("");
     const cardsListCopy = cardsList.slice();
@@ -72,8 +83,13 @@ function Manage() {
 
   return (
     <div className="mx-24">
-      <div className="flex flex-wrap gap-3 flex-row mt-12 bg-slate-400 p-6 rounded-sm">
-        {/* área para apresentação das cartas (deck) */}
+      <div className="cursor-pointer mt-4 ">
+        <Link to="/">
+          <img src={home} alt="Home" />
+        </Link>
+      </div>
+      {/* área para apresentação das cartas (deck) */}
+      <div className="flex flex-wrap gap-3 flex-row mt-4 bg-slate-400 p-6 rounded-sm">
         {cardsList.length > 0 ? (
           cardsList.map((item: ICard, idx: React.Key | null | undefined) => (
             <Deck
@@ -125,6 +141,9 @@ function Manage() {
         </div>
       </div>
       {/* área para apresentar os restultados da pesquisa e o spinner (loading) */}
+      <div className="form-label inline-block mb-2 text-gray-700">
+        Resultados encontrados: {cards && cards.length}
+      </div>
       <div className="flex flex-row flex-wrap gap-4 mt-6">
         {loading ? (
           <div className="flex justify-center m-5 w-full">

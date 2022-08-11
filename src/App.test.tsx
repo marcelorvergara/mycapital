@@ -29,11 +29,19 @@ describe("App test", () => {
 
 describe("Manage test", () => {
   it("renders Manage page", () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
   });
 
   it("should test autocomplete", async () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "mycapital" } });
 
@@ -41,7 +49,11 @@ describe("Manage test", () => {
   });
 
   it("should test card rendering inside Manage component", () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 
@@ -49,7 +61,11 @@ describe("Manage test", () => {
   });
 
   it("should test add card", async () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 
@@ -58,7 +74,11 @@ describe("Manage test", () => {
   });
 
   it("should test remove card", async () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 
@@ -70,7 +90,11 @@ describe("Manage test", () => {
   });
 
   it("should test card limit of same card", async () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 
@@ -85,7 +109,11 @@ describe("Manage test", () => {
   });
 
   it("should test card limit of 30", async () => {
-    render(<Manage />);
+    render(
+      <MemoryRouter>
+        <Manage />
+      </MemoryRouter>
+    );
     const filter = screen.getByLabelText(/Consulta de carta por Id:/i);
     fireEvent.change(filter, { target: { value: "a" } });
 

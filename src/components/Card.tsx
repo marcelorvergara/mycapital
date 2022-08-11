@@ -14,7 +14,7 @@ function Card({ card, addCardToList }: ICardProps) {
           {card.nome}
         </h5>
         <p className="text-gray-700 text-base mb-1">{card.descricao}</p>
-        <div className="grid grid-cols-2 mb-2 bg-slate-200 p-2 rounded-sm">
+        <div className="grid grid-cols-2 mb-2 bg-slate-200 p-2 rounded-sm text-sm">
           <div>Ataque: {card.ataque}</div>
           <div>Defesa: {card.defesa}</div>
           <div>Tipo: {card.tipo}</div>
