@@ -8,7 +8,7 @@ interface ICardProps {
 
 function Card({ card, addCardToList }: ICardProps) {
   return (
-    <div className="w-80">
+    <div className="w-72">
       <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg bg-white max-w-sm h-72">
         <h5 className="text-gray-50 text-xl leading-tight font-medium mb-2 bg-slate-600 rounded-sm px-2.5 py-2">
           {card.nome}

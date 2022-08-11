@@ -3,6 +3,7 @@ import { ICard, searchCardApi } from "../api/client";
 import Card from "../components/Card";
 import Deck from "../components/Deck";
 import Select from "react-select";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const options = [
   { value: "mago", label: "Mago" },
@@ -14,13 +15,16 @@ const options = [
 
 function Manage() {
   const [alert, setAlert] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // listagem de cards mostrados pela busca
   const [cards, setCards] = useState<ICard[]>([]);
 
   async function searchCard(e: string, field: string) {
+    setLoading(true);
     const response = await searchCardApi(e, field);
     setCards(response);
+    setLoading(false);
   }
 
   // administração do deck de cards
@@ -193,7 +197,12 @@ function Manage() {
         </div>
       </div>
       <div className="flex flex-row flex-wrap gap-4 mt-6">
-        {cards &&
+        {loading ? (
+          <div className="flex justify-center m-5 w-full">
+            <ClipLoader size={150} />
+          </div>
+        ) : (
+          cards &&
           cards.map((card: ICard) => (
             <Card
               key={card.id}
@@ -203,7 +212,8 @@ function Manage() {
                 card: ICard
               ) => addCardToList(e, card)}
             />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
