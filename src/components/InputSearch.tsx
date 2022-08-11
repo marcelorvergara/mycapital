@@ -1,9 +1,12 @@
+import { RefObject } from "react";
+
 interface IInputSearchProps {
   field: string;
   searchCard: (e: string, field: string) => {};
+  reference: RefObject<HTMLInputElement>;
 }
 
-function InputSearch({ field, searchCard }: IInputSearchProps) {
+function InputSearch({ field, searchCard, reference }: IInputSearchProps) {
   return (
     <div className="mb-3 xl:w-70">
       <label
@@ -12,7 +15,9 @@ function InputSearch({ field, searchCard }: IInputSearchProps) {
         Consulta de carta por {field}:
       </label>
       <input
+        ref={reference}
         type="search"
+        autoComplete="off"
         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none      "
         id="cardSearchId"
         placeholder="Procure por cartas aqui"

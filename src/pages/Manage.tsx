@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ICard, searchCardApi } from "../api/client";
 import Card from "../components/Card";
 import Deck from "../components/Deck";
@@ -10,7 +10,6 @@ import home from "../img/home.png";
 import { Link } from "react-router-dom";
 
 const options = [
-  { value: null, label: "Classe" },
   { value: "mago", label: "Mago" },
   { value: "paladino", label: "Paladino" },
   { value: "caçador", label: "Caçador" },
@@ -81,6 +80,19 @@ function Manage() {
     setCardsList(cardsListCopy);
   }
 
+  // limpando os filtrso - melhorar
+  const refId = useRef<HTMLInputElement>(null);
+  const refNome = useRef<HTMLInputElement>(null);
+  function limpaFiltros() {
+    console.log("TESTE");
+    if (refId.current) {
+      refId.current.value = "";
+    }
+    if (refNome.current) {
+      refNome.current.value = "";
+    }
+  }
+
   return (
     <div className="mx-24">
       <div className="cursor-pointer mt-4 ">
@@ -116,8 +128,12 @@ function Manage() {
       {/* área para os inputs de pesquisa das cartas */}
       <div className="flex mt-6">
         <div className="flex justify-center gap-6">
-          <InputSearch field={"id"} searchCard={searchCard} />
-          <InputSearch field={"nome"} searchCard={searchCard} />
+          <InputSearch field={"id"} searchCard={searchCard} reference={refId} />
+          <InputSearch
+            field={"nome"}
+            searchCard={searchCard}
+            reference={refNome}
+          />
           <div className="mb-3 xl:w-70">
             <label
               htmlFor="cardSearchClasse"
@@ -137,6 +153,14 @@ function Manage() {
               Consulta de carta por tipo:
             </label>
             <RadioButton searchCard={searchCard} />
+          </div>
+          <div className="mt-2 ml-12">
+            <button
+              type="button"
+              className="h-12 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+              onClick={limpaFiltros}>
+              Limpar Filtros
+            </button>
           </div>
         </div>
       </div>

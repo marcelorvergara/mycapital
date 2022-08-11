@@ -18,7 +18,7 @@
 
 - Node e o back-end disponível em [Back-end HearthStone](https://github.com/marcelorvergara/HearthStoneBackEnd).
 
-### O que pode melhorar
+### O que pode melhorar?
 
 - O mecanismo de busca não realiza buscas combinadas de forma satisfatória.
 - A responsividade para aparelhos móveis não foi considerada.
