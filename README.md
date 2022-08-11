@@ -20,7 +20,7 @@
 
 ### O que pode melhorar
 
-- A cobertura de testes está um pouco acima de 90%.
+- A cobertura de testes está um pouco acima de 90%. Relatório disponível em [Coverage](https://github.com/marcelorvergara/mycapital/blob/main/coverage/lcov-report/index.html).
 - O mecanismo de busca não realiza buscas combinadas de forma satisfatória.
 - A responsividade para aparelhos móveis não foi considerada.
 
