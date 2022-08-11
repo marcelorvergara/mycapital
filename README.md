@@ -24,31 +24,37 @@
 - O mecanismo de busca não realiza buscas combinadas de forma satisfatória.
 - A responsividade para aparelhos móveis não foi considerada.
 
-## Project setup
+## Setup do projeto
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compila e permite hot-reloads para desenvolvimento
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Script para produção
 
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Lints e fixes dos arquivos
 
 ```
 npm run lint
 ```
 
-## Learn More
+### Testes e relatório cobertura
+
+```
+npm run test
+```
+
+## Mais sobre o React
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
